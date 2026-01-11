@@ -34,11 +34,13 @@ user_amount_sum_dict = {}
 #return valuable user list where the amount of the successful transaction is more than or equal to 400
 valuable_users_list = []
 
+#sum function always sums the full list 
 for user_id,amounts in user_amount_dict.items():
+    summed_amount = sum(amounts)
+    if summed_amount >= 400:
+        valuable_users_list.append(user_id)
+    else:
+        continue
 
-    for amount in amounts:
-        print(amount)
-        user_amount_sum_dict[user_id] = amount
-
-print(user_amount_sum_dict)
+print(valuable_users_list)
 
