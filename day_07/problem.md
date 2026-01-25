@@ -57,3 +57,41 @@ Have at least 5 total events
 Were active on at least 2 unique days
 
 Pattern: group → count + set → multi-condition
+
+Problem 15: Loyal Users (≥ 4 events)
+
+Statement:
+You are given a list of user events with user_id.
+Return users who have performed at least 4 events in total.
+
+Problem 16: Successful & Active Users
+
+Statement:
+Return users who have:
+
+≥ 2 SUCCESS transactions
+
+≥ 3 total transactions
+
+Problem 17: High Average Buyers
+
+Statement:
+Given transactions with user_id and amount,
+return users whose average transaction amount ≥ 250.
+
+Problem 18: Multi-Day Active Users
+
+Statement:
+Return users who were active on at least 2 different days
+and performed at least 3 events.
+
+Problem 19: Purchase-Only Users
+
+Statement:
+Return users who have performed only "purchase" events
+(no login, no logout).
+
+Problem 20: One-Time Users
+
+Statement:
+Return users who have performed exactly 1 event.
