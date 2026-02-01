@@ -166,3 +166,41 @@ for user_id,value in user_purchase_unique_days.items():
         power_users.append(user_id)
 
 print(power_users)
+
+l = [2,3,4,10,1,5,5,3,5]
+max = l[0]
+for x in l:
+    if x > max:
+        max = x
+    
+print(max)
+
+min = l[0]
+for x in l:
+    if x < min:
+        min = x
+
+print(min)
+
+#most repeated number
+num_count_dict = {}
+
+for x in l:
+    if x not in num_count_dict:
+        num_count_dict[x] = 1
+    else:
+        num_count_dict[x] += 1
+
+max_num = list(num_count_dict.keys())[0]
+max_num_fig = next(iter(num_count_dict)) # to get the first key of the dictionary
+print("First key of the dictionary",max_num_fig)
+print(f"First element of the dict :{max_num}")
+for x,y in num_count_dict.items():
+
+    if y > max_num:
+        max_num_fig = x
+
+print(f"The most num fig that appeared : {max_num_fig}")
+
+    
+
