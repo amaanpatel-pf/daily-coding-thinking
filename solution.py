@@ -202,5 +202,125 @@ for x,y in num_count_dict.items():
 
 print(f"The most num fig that appeared : {max_num_fig}")
 
+events = [
+    {"user_id": 1, "event": "login", "timestamp": "2024-01-01"},
+    {"user_id": 1, "event": "purchase", "timestamp": "2024-01-03"},
+    {"user_id": 2, "event": "login", "timestamp": "2024-01-01"},
+    {"user_id": 2, "event": "login", "timestamp": "2024-01-02"},
+    {"user_id": 3, "event": "login", "timestamp": "2024-01-05"},
+]
+
+
+"""
+Identify **active users** based on the following business rules:
+
+A user is considered **active** if:
+1. The user has performed **at least two events**, and
+2. **At least one of those events is NOT a "login"** event
+"""
+
+
+active_users = []
+
+user_event_dict = {}
+
+for event in events:
+    user_id = event['user_id']
+    actual_event = event['event']
+    timestamp = event['timestamp']
+
+    if user_id not in user_event_dict:
+        user_event_dict[user_id] = []
     
+    user_event_dict[user_id].append(actual_event)
+
+print('user event dict for login events',user_event_dict)
+
+
+for user_id, events in user_event_dict.items():
+
+    non_login_events = [x for x in events if x != 'login']
+    #user should perform atleast 2 events
+    if len(events) >= 2 and len(non_login_events) >= 1:
+        active_users.append(user_id)
+
+print(f"Active users as per the condition : {active_users}")
+
+transactions = [
+    {"user_id": 1, "amount": 200, "status": "SUCCESS"},
+    {"user_id": 1, "amount": 150, "status": "FAILED"},
+    {"user_id": 1, "amount": 300, "status": "SUCCESS"},
+    {"user_id": 2, "amount": 100, "status": "FAILED"},
+    {"user_id": 2, "amount": 120, "status": "FAILED"},
+    {"user_id": 3, "amount": 500, "status": "SUCCESS"},
+]
+
+user_succesful_amount_dict = {}
+
+valuable_users = []
+
+"""
+Identify **valuable users** based on the following business rules:
+
+A user is considered **valuable** if:
+1. The user has performed **at least two successful transactions**, and
+2. The **total amount of successful transactions is greater than or equal to 400**
+"""
+
+for transaction in transactions:
+    user_id = transaction['user_id']
+    amount = transaction['amount']
+    status = transaction['status']
+
+    if user_id not in user_succesful_amount_dict:
+        user_succesful_amount_dict[user_id] = []
+    
+    if status.lower() == 'success':
+        user_succesful_amount_dict[user_id].append(amount)
+
+print(user_succesful_amount_dict)
+for user_id, amounts in user_succesful_amount_dict.items():
+
+    if len(amounts) >= 2 and sum(amounts) >= 400:
+        valuable_users.append(user_id)
+
+print('The valuable users as per the condition :',valuable_users)
+
+"""
+Identify **engaged users** based on the following business rules:
+
+A user is considered **engaged** if:
+1. The user has performed **at least two sessions**, and
+2. The **average session duration** for the user is **greater than or equal to 15 minutes**
+"""
+
+sessions = [
+    {"user_id": 1, "session_date": "2024-01-01", "duration_minutes": 25},
+    {"user_id": 1, "session_date": "2024-01-02", "duration_minutes": 25},
+    {"user_id": 1, "session_date": "2024-01-03", "duration_minutes": 10},
+    {"user_id": 2, "session_date": "2024-01-01", "duration_minutes": 2},
+    {"user_id": 2, "session_date": "2024-01-02", "duration_minutes": 3},
+    {"user_id": 3, "session_date": "2024-01-05", "duration_minutes": 40},
+]
+
+engaged_users = []
+
+user_session_dict = {}
+
+for session in sessions:
+    user_id = session['user_id']
+    session_date = session['session_date']
+    duration_minutes = session['duration_minutes']
+
+    if user_id not in user_session_dict:
+        user_session_dict[user_id] = []
+    
+    user_session_dict[user_id].append(duration_minutes)
+
+for user_id, sessions in user_session_dict.items():
+
+    if len(sessions) >= 2 and (sum(sessions)/len(sessions)) >= 15:
+        engaged_users.append(user_id)
+
+print(f"Engaged users list : {user_id}")
 
