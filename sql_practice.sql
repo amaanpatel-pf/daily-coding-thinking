@@ -1215,3 +1215,56 @@ from (
      ) x 
 where rn <= 2
 order by label_source,rn
+
+select *
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+limit 10;
+
+select distinct(type)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker -- unavailable_property
+
+select count(distinct property_listing_id)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+where type = 'unavailable_property' and status = 'deleted' and extract(year from created_at) = 2025
+
+select distinct(type),count(distinct property_listing_id)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+group by 1
+order by 2 desc
+
+select column_name
+from information_schema.columns
+where table_schema = 'pf_dwh' and table_name = 'dim_property_listing_action_tracker'
+
+select distinct(status)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+
+select property_listing_id,key_date,property_listing_status
+from pf_de_prod_db.pf_dwh.dim_property_listing_snp
+where key_country = 1004 and property_listing_id = 13337305
+-- and key_date between 20240401 and 20240431
+order by key_date asc
+
+select distinct(status_reason),count(distinct property_listing_id)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+where type = 'unavailable_property' and created_at >= '2024-12-01' and created_at <= '2025-12-01'
+group by 1
+order by 2 desc
+
+select distinct(extract(month from created_at)),count(distinct property_listing_id)
+from pf_de_prod_db.pf_dwh.dim_property_listing_action_tracker
+where type = 'unavailable_property' and created_at >= '2024-12-01' and created_at <= '2025-12-01' and status_reason = 'DELETED'
+group by 1
+order by 2 desc
+limit 10;
+
+select *
+from pf_dsai_prod_db.analytics.availability_score_training_dataset_v6
+limit 10;
+
+select label_source,signal_source
+from pf_dsai_prod_db.analytics.availability_score_training_dataset_v6
+limit 10;
+
+select distinct(label)
+from pf_dsai_prod_db.analytics.availability_score_training_dataset_v6
