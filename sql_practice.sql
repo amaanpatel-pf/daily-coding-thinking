@@ -1268,3 +1268,33 @@ limit 10;
 
 select distinct(label)
 from pf_dsai_prod_db.analytics.availability_score_training_dataset_v6
+
+select * 
+from (
+    select t.*,
+           row_number() over(
+               partition by t.label_source
+               order by random()
+               ) as rn
+    from pf_dsai_prod_db.analytics.availability_score_training_dataset_v5 t
+     ) x 
+where rn <= 2
+order by label_source, rn
+
+select *
+from (
+    select t.*,
+           row_number() over(partition by t.label_source
+               order by random() ) as rn
+    from pf_dsai_prod_db.analytics.availability_score_training_dataset_v5 t
+     ) x 
+where rn <= 2
+order by label_source,rn
+
+select count(*)
+FROM pf_dsai_prod_db.analytics.search_sample
+
+select collector_tstamp,count(*)
+FROM pf_dsai_prod_db.analytics.search_sample
+group by 1
+order by 2 desc
