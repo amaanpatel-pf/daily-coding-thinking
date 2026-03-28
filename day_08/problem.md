@@ -29,3 +29,22 @@ sessions = [
     {"user_id": 2, "session_date": "2024-01-02", "duration_minutes": 3},
     {"user_id": 3, "session_date": "2024-01-05", "duration_minutes": 40},
 ]
+
+# Problem 25: Highly Active & Consistent Users
+
+# Statement:
+# Return users who:
+
+# Have ≥ 5 total events
+
+# Were active on ≥ 3 unique days
+
+events = [
+    {"user_id": 1, "date": "2024-01-01"},
+    {"user_id": 1, "date": "2024-01-01"},
+    {"user_id": 1, "date": "2024-01-02"},
+    {"user_id": 1, "date": "2024-01-02"},
+    {"user_id": 1, "date": "2024-01-03"},
+    {"user_id": 2, "date": "2024-01-01"},
+    {"user_id": 2, "date": "2024-01-02"},
+]

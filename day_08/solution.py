@@ -42,3 +42,47 @@ for key,value in user_transaction_dict.items():
         valuable_users.append(key)
 print("Valuable users list:",valuable_users)
     
+# Problem 25: Highly Active & Consistent Users
+
+# Statement:
+# Return users who:
+
+# Have ≥ 5 total events
+
+# Were active on ≥ 3 unique days
+
+events = [
+    {"user_id": 1, "date": "2024-01-01"},
+    {"user_id": 1, "date": "2024-01-01"},
+    {"user_id": 1, "date": "2024-01-02"},
+    {"user_id": 1, "date": "2024-01-02"},
+    {"user_id": 1, "date": "2024-01-03"},
+    {"user_id": 2, "date": "2024-01-01"},
+    {"user_id": 2, "date": "2024-01-02"},
+]
+
+active_users = []
+user_date_dict = {}
+
+for event in events:
+    user_id = event["user_id"]
+    date = event["date"]
+    
+    if user_id not in user_date_dict:
+        user_date_dict[user_id] = {"total_events":0,"unique_days":[date]}
+    
+    if date not in user_date_dict[user_id]["unique_days"]:
+        user_date_dict[user_id]["unique_days"].append(date)
+    
+    user_date_dict[user_id]["total_events"] += 1
+
+print(user_date_dict)
+
+for key,value in user_date_dict.items():
+    total_events = value["total_events"]
+    unique_days = value["unique_days"]
+    
+    if total_events >= 5 and len(unique_days):
+        active_users.append(key)
+
+print("Active users:",active_users)
